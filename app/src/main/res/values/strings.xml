@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">The Meal DB</string>
+    <string name="txt_not_null">Cannot be NULL!</string>
+    <string name="txt_not_empty">Cannot be Empty!</string>
+    <string name="txt_not_email">Invalid Email!</string>
+    <string name="txt_not_min_length_8">Minimum 8 characters!</string>
+    <string name="txt_not_lowercase_and_uppercase">Must contain both Uppercase or Lowercase!</string>
+    <string name="menu_foods">Meals</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="menu_profile">Users</string>
+    <string name="txt_login">Authentication</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_btn_login">Login</string>
+</resources>
