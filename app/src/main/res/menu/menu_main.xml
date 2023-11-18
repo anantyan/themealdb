@@ -7,16 +7,16 @@
         android:icon="@drawable/ic_lunch_dining"
         android:title="@string/menu_foods" />
     <item
+        android:id="@+id/searchFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_search"
+        android:title="@string/menu_search" />
+    <item
         android:id="@+id/bookmarkFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/ic_bookmark"
         android:title="@string/menu_favorites" />
-    <item
-        android:id="@+id/usersFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:icon="@drawable/ic_person"
-        android:title="@string/menu_profile" />
 
 </menu>

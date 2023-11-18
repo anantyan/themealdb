@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import id.anantyan.foodapps.common.getValue
 import id.anantyan.foodapps.common.setValue
@@ -18,8 +18,9 @@ class PreferencesDataSourceImpl(
         private const val DATASTORE_SETTINGS: String = "SETTINGS"
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(DATASTORE_SETTINGS)
         private val LOGIN = booleanPreferencesKey("LOGIN")
-        private val USER_ID = intPreferencesKey("USER_ID")
+        private val TOKEN = stringPreferencesKey("TOKEN")
     }
+
     override suspend fun setLogin(value: Boolean) {
         context.dataStore.setValue(LOGIN, value)
     }
@@ -28,11 +29,11 @@ class PreferencesDataSourceImpl(
         return context.dataStore.getValue(LOGIN, false)
     }
 
-    override suspend fun setUsrId(value: Int) {
-        context.dataStore.setValue(USER_ID, value)
+    override suspend fun setToken(value: String) {
+        context.dataStore.setValue(TOKEN, value)
     }
 
-    override fun getUsrId(): Flow<Int> {
-        return context.dataStore.getValue(USER_ID, -1)
+    override fun getToken(): Flow<String> {
+        return context.dataStore.getValue(TOKEN, "")
     }
 }

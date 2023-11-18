@@ -11,6 +11,16 @@ interface RecipesApi {
         @Query("s") query: String? = null
     ): Response<RecipesResponse>
 
+    @GET("filter.php")
+    suspend fun resultsByCategory(
+        @Query("c") query: String? = null
+    ): Response<RecipesResponse>
+
+    @GET("filter.php")
+    suspend fun resultsByArea(
+        @Query("a") query: String? = null
+    ): Response<RecipesResponse>
+
     @GET("lookup.php")
     suspend fun result(
         @Query("i") id: Int? = 0
@@ -23,6 +33,6 @@ interface RecipesApi {
 
     @GET("list.php")
     suspend fun areas(
-        @Query("c") type: String? = "list"
+        @Query("a") type: String? = "list"
     ): Response<RecipesResponse>
 }

@@ -27,7 +27,7 @@ fun TextInputLayout.passwordValid(): Validation {
             +notNull(R.string.txt_not_null)
             +notEmpty(R.string.txt_not_empty)
             +minimumLength(8, R.string.txt_not_min_length_8)
-            +withPassword(PasswordRule.PasswordRegex.ALPHA_MIXED_CASE, R.string.txt_not_lowercase_and_uppercase)
+            // +withPassword(PasswordRule.PasswordRegex.ALPHA_MIXED_CASE, R.string.txt_not_lowercase_and_uppercase)
         }
     }
 }

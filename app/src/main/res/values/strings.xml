@@ -7,9 +7,19 @@
     <string name="txt_not_lowercase_and_uppercase">Must contain both Uppercase or Lowercase!</string>
     <string name="menu_foods">Meals</string>
     <string name="menu_favorites">Favorites</string>
-    <string name="menu_profile">Users</string>
+    <string name="menu_search">Search</string>
     <string name="txt_login">Authentication</string>
     <string name="txt_email">Email</string>
     <string name="txt_password">Password</string>
     <string name="txt_btn_login">Login</string>
+    <string name="txt_invalid_login">User Not Found!</string>
+    <string name="txt_loading">Loading…</string>
+    <string name="txt_invalid_lost_or_failed">Couldn\'t be loaded</string>
+    <string name="txt_btn_retry">Retry</string>
+    <string name="txt_invalid_profile">Invalid reponse Profile!</string>
+    <string name="txt_invalid_recipe_meals">Invalid response Recipe Meals!</string>
+    <string name="txt_range_by_country">Range by Country</string>
+    <string name="txt_unbookmark">Unbookmark</string>
+    <string name="txt_bookmark">Bookmark</string>
+    <string name="txt_searching">Searching</string>
 </resources>

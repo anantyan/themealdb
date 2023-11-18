@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/rangeCountry"
+        android:icon="@drawable/ic_country"
+        android:title="@string/txt_range_by_country"
+        app:showAsAction="ifRoom" />
+</menu>

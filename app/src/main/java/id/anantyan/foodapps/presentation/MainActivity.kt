@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         navController = host.navController
         navController.addOnDestinationChangedListener(this)
 
-        if (viewModel.getLogin) {
+        if (viewModel.checkLogin()) {
             val destination = LoginFragmentDirections.actionRootToHomeFragment()
             navController.navigate(destination)
         } else {
@@ -51,9 +51,13 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     ) {
         when (destination.id) {
             R.id.homeFragment -> binding.bottomNav.isVisible = true
-            R.id.usersFragment -> binding.bottomNav.isVisible = true
+            R.id.searchFragment -> binding.bottomNav.isVisible = true
             R.id.bookmarkFragment -> binding.bottomNav.isVisible = true
             else -> binding.bottomNav.isVisible = false
         }
+    }
+
+    fun bottomNav(bool: Boolean = false) {
+        binding.bottomNav.isVisible = bool
     }
 }
