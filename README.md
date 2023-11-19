@@ -4,7 +4,7 @@
 
 [Description](https://github.com/anantyan/themealdb#-description)
 
-[Project Structure](https://github.com/anantyan/themealdb#-technology-and-library)
+[Technology and Library](https://github.com/anantyan/themealdb#-technology-and-library)
 
 [Snapshoot](https://github.com/anantyan/themealdb#%EF%B8%8F-snapshoot)
 
