@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import id.anantyan.foodapps.data.remote.model.AuthsResponse
 import id.anantyan.foodapps.data.remote.model.DataItem
 import id.anantyan.foodapps.data.remote.model.MealsItem
+import id.anantyan.foodapps.data.remote.model.RecipesResponse
 import kotlinx.coroutines.flow.Flow
 
 class MainUseCase(private val mainRepository: MainRepository) {
@@ -20,4 +21,9 @@ class MainUseCase(private val mainRepository: MainRepository) {
     suspend fun executeLogin(email: String, password: String): AuthsResponse? = mainRepository.login(email, password)
     fun executeUserResults(): Flow<PagingData<DataItem>> = mainRepository.userResults()
     suspend fun executeUserResult(id: Int): DataItem? = mainRepository.userResult(id)
+
+    suspend fun executeRecipeBookmark(item: MealsItem) = mainRepository.recipeBookmark(item)
+    suspend fun executeRecipeUnbookmark(idMeal: Int) = mainRepository.recipeUnbookmark(idMeal)
+    suspend fun executeRecipeCheckMeal(idMeal: Int) = mainRepository.recipeCheckMeal(idMeal)
+    fun executeRecipeResults() = mainRepository.recipeResults()
 }

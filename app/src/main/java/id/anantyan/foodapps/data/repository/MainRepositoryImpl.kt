@@ -2,6 +2,7 @@ package id.anantyan.foodapps.data.repository
 
 import android.util.Log
 import androidx.paging.PagingData
+import id.anantyan.foodapps.data.local.datasource.MealsLocalDataSource
 import id.anantyan.foodapps.data.local.datasource.PreferencesDataSource
 import id.anantyan.foodapps.data.remote.datasource.AuthsRemoteDataSource
 import id.anantyan.foodapps.data.remote.datasource.MealsRemoteDataSource
@@ -9,11 +10,14 @@ import id.anantyan.foodapps.data.remote.model.AuthsResponse
 import id.anantyan.foodapps.data.remote.model.DataItem
 import id.anantyan.foodapps.data.remote.model.MealsItem
 import id.anantyan.foodapps.data.remote.model.UsersResponse
+import id.anantyan.foodapps.domain.model.RecipeModel
+import id.anantyan.foodapps.domain.model.toEntity
 import id.anantyan.foodapps.domain.repository.MainRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
@@ -22,6 +26,7 @@ import kotlinx.coroutines.withContext
 class MainRepositoryImpl(
     private val mealsRemoteDataSource: MealsRemoteDataSource,
     private val authsRemoteDataSource: AuthsRemoteDataSource,
+    private val mealsLocalDataSource: MealsLocalDataSource,
     private val preferencesDataSource: PreferencesDataSource
 ) : MainRepository {
     override suspend fun results(query: String?): List<MealsItem> {
@@ -116,5 +121,25 @@ class MainRepositoryImpl(
             Log.d("MEALS-DEBUG", e.message.toString())
             null
         }
+    }
+
+    override suspend fun recipeBookmark(item: MealsItem) {
+        val tokenUser = runBlocking { preferencesDataSource.getToken().first() }
+        mealsLocalDataSource.bookmark(item.toEntity(tokenUser))
+    }
+
+    override suspend fun recipeUnbookmark(idMeal: Int) {
+        val tokenUser = runBlocking { preferencesDataSource.getToken().first() }
+        mealsLocalDataSource.unbookmark(idMeal, tokenUser)
+    }
+
+    override suspend fun recipeCheckMeal(idMeal: Int): RecipeModel? {
+        val tokenUser = runBlocking { preferencesDataSource.getToken().first() }
+        return mealsLocalDataSource.checkMeal(idMeal, tokenUser)
+    }
+
+    override fun recipeResults(): Flow<List<RecipeModel>> {
+        val tokenUser = runBlocking { preferencesDataSource.getToken().first() }
+        return mealsLocalDataSource.results(tokenUser)
     }
 }

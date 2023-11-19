@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import id.anantyan.foodapps.presentation.bookmark.MealsLocalAdapter
 import id.anantyan.foodapps.presentation.home.CategoriesAdapter
 import id.anantyan.foodapps.presentation.home.MealsAdapter
 import id.anantyan.foodapps.presentation.home.UsersAdapter
@@ -24,5 +25,10 @@ object AdapterModule {
     @Provides
     fun provideMealsAdapter(): MealsAdapter {
         return MealsAdapter()
+    }
+
+    @Provides
+    fun provideMealsLocalAdapter(): MealsLocalAdapter {
+        return MealsLocalAdapter()
     }
 }

@@ -51,6 +51,16 @@ class RecipeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
 
     @SuppressLint("SetTextI18n")
     private fun bindObserver() {
+        viewModel.bookmarked.observe(viewLifecycleOwner) { state: Boolean ->
+            if (state) {
+                binding.toolbar.menu.findItem(R.id.unbookmark).isVisible = false
+                binding.toolbar.menu.findItem(R.id.bookmark).isVisible = true
+            } else {
+                binding.toolbar.menu.findItem(R.id.unbookmark).isVisible = true
+                binding.toolbar.menu.findItem(R.id.bookmark).isVisible = false
+            }
+        }
+
         viewModel.recipeResult(args.recipeId).observe(viewLifecycleOwner) { state: UIState<MealsItem> ->
             when (state) {
                 is UIState.Loading -> {
@@ -105,6 +115,8 @@ class RecipeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                 }
             }
         }
+
+        viewModel.recipeCheckResult(args.recipeId)
     }
 
     private fun bindView() {
@@ -131,13 +143,11 @@ class RecipeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.unbookmark -> {
-                binding.toolbar.menu.findItem(R.id.unbookmark).isVisible = false
-                binding.toolbar.menu.findItem(R.id.bookmark).isVisible = true
+                viewModel.recipeBookmark(args.recipeId)
                 true
             }
             R.id.bookmark -> {
-                binding.toolbar.menu.findItem(R.id.unbookmark).isVisible = true
-                binding.toolbar.menu.findItem(R.id.bookmark).isVisible = false
+                viewModel.recipeUnbookmark(args.recipeId)
                 true
             }
             else -> false

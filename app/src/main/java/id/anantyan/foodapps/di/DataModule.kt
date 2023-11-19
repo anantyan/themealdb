@@ -7,6 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import id.anantyan.foodapps.data.local.dao.RecipesDao
+import id.anantyan.foodapps.data.local.datasource.MealsLocalDataSource
+import id.anantyan.foodapps.data.local.datasource.MealsLocalDataSourceImpl
 import id.anantyan.foodapps.data.local.datasource.PreferencesDataSource
 import id.anantyan.foodapps.data.local.datasource.PreferencesDataSourceImpl
 import id.anantyan.foodapps.data.remote.datasource.AuthsRemoteDataSource
@@ -31,6 +34,12 @@ object DataModule {
     @Provides
     fun provideMealsRemoteDataSource(@Named("MEALS") recipesApi: RecipesApi): MealsRemoteDataSource {
         return MealsRemoteDataSourceImpl(recipesApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMeasLocalDataSource(recipesDao: RecipesDao): MealsLocalDataSource {
+        return MealsLocalDataSourceImpl(recipesDao)
     }
 
     @Singleton
