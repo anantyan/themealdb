@@ -12,7 +12,7 @@
 
 ### 📌 Description
 
-Project hasil pembuatan dari Test Code untuk membuat sebuah aplikasi berbasis android yang terhubung dengan The Meal DB, untuk architecture telah dibuat menggunakan rekomendasi MAD (Modern Android Developer) yang dimana telah menggunakan konsep Design Pattern MVVM dan Clean Architecture beserta Injection. Untuk temanya sendiri menggunakan bawaan dari Material Design 3 (Material You).
+Project hasil pembuatan dari Test Code untuk membuat sebuah aplikasi berbasis android yang terhubung dengan The Meal DB, untuk architecture telah dibuat menggunakan rekomendasi MAD (Modern Android Developer) yang dimana telah menggunakan konsep Design Pattern MVVM dan Clean Architecture beserta Injection. Untuk temanya sendiri menggunakan bawaan dari Material Design 3 (Material You). Rest Api yang dipakai untuk Test Code https://www.themealdb.com/api.php & https://reqres.in/
 
 ***note:*** 
 
