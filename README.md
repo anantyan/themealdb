@@ -29,6 +29,7 @@ Project hasil pembuatan dari Test Code untuk membuat sebuah aplikasi berbasis an
 - ViewModel + LifeCycle
 - Paging 3 + RecyclerView
 - Kotlin Coroutine
+- Retrofit for Consume API
 - Room Database
 - Coil for Load Image
 - Chucker for Logging HTTP Request & Response
