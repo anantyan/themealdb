@@ -75,27 +75,25 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
         binding.toolbar.isTitleCentered = true
         binding.toolbar.setOnMenuItemClickListener(this)
 
-        binding.rvAvatar.setHasFixedSize(true)
+        binding.rvAvatar.setHasFixedSize(false)
         binding.rvAvatar.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         binding.rvAvatar.itemAnimator = DefaultItemAnimator()
         binding.rvAvatar.isNestedScrollingEnabled = true
+        binding.rvAvatar.adapter = usersAdapter
 
-        binding.rvCategories.setHasFixedSize(true)
+        binding.rvCategories.setHasFixedSize(false)
         binding.rvCategories.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         binding.rvCategories.itemAnimator = DefaultItemAnimator()
         binding.rvCategories.isNestedScrollingEnabled = true
+        binding.rvCategories.adapter = categoriesAdapter
 
-        binding.rvMeals.setHasFixedSize(true)
+        binding.rvMeals.setHasFixedSize(false)
         binding.rvMeals.layoutManager = StaggeredGridLayoutManager(requireActivity().windowManager.calculateSpanCount(), RecyclerView.VERTICAL)
         binding.rvMeals.itemAnimator = DefaultItemAnimator()
         binding.rvMeals.isNestedScrollingEnabled = true
+        binding.rvMeals.adapter = mealsAdapter
 
         usersAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        usersAdapter.addLoadStateListener { states: CombinedLoadStates ->
-            if (states.source.refresh is LoadState.NotLoading) {
-                binding.rvAvatar.adapter = usersAdapter
-            }
-        }
         usersAdapter.onClick { _, item ->
             val destination = HomeFragmentDirections.actionHomeFragmentToProfileFragment(item.id ?: -1)
             findNavController().navigate(destination)
@@ -114,15 +112,12 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
     }
 
     private fun bindObserver() {
-        viewModel.mealsResults()
-
         viewModel.userResults().observe(viewLifecycleOwner) { list: PagingData<DataItem> ->
-            usersAdapter.submitData(viewLifecycleOwner.lifecycle, list)
+            usersAdapter.submitData(lifecycle, list)
         }
 
         viewModel.categoryResults().observe(viewLifecycleOwner) { list: List<MealsItem> ->
             categoriesAdapter.submitList(list)
-            binding.rvCategories.adapter = categoriesAdapter
         }
 
         viewModel.mealsResults.observe(viewLifecycleOwner) { list: UIState<List<MealsItem>> ->
@@ -137,7 +132,6 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                     binding.imgLost.isVisible = false
                     binding.rvMeals.isVisible = true
                     mealsAdapter.submitList(list.data)
-                    binding.rvMeals.adapter = mealsAdapter
                 }
                 is UIState.Error -> {
                     binding.progressBar.isVisible = false
@@ -147,6 +141,8 @@ class HomeFragment : Fragment(), Toolbar.OnMenuItemClickListener {
                 }
             }
         }
+
+        viewModel.mealsResults()
     }
 
     override fun onDestroyView() {
